@@ -15,7 +15,7 @@ from boto.s3.connection import S3Connection
 try:
     from .secret import *
 except Exception as e:
-    SECRET_KEY=S3Connection(os.environ['SECRET_KEY'])
+    SECRET_KEY=os.environ['SECRET_KEY']
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
