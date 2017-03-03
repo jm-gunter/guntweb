@@ -11,10 +11,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import dj_database_url
-from boto.s3.connection import S3Connection
-#try:
-#    from .secret import *
-#except Exception as e:
 
 SECRET_KEY=os.environ['SECRET_KEY']
 
