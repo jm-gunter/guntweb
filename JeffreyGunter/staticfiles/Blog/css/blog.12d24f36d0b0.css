@@ -1,0 +1,147 @@
+h1, h1 a {
+  color: #999;
+}
+
+h1 a:hover {
+  text-decoration: none;
+}
+
+a {
+  color: #999;
+}
+
+a:hover {
+  color: #666;
+}
+
+.desktop-menu {
+  display: block;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+
+.desktop-menu a {
+  color: #999;
+  float: left;
+  padding: 10px;
+  text-align: center;
+}
+
+.desktop-menu a:hover {
+  color: #666;
+  display: block;
+  text-decoration: none;
+}
+
+#home-btn:hover {
+  background-color: #a3f4ff;
+}
+
+#about-btn:hover {
+  background-color: #ccf486;
+}
+
+#contact-btn:hover {
+  background-color: #f9f568;
+}
+
+#archive-btn:hover {
+  background-color: #ffa189;
+}
+
+#projects-btn:hover {
+  background-color: #d7a0ff;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.mobil-menu button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: 0;
+  text-indent: 200%;
+  overflow: hidden;
+  background: url(http://i.imgur.com/vKRaKDX.png) center no-repeat;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-size: 80%;
+  width: 30px;
+  height: 30px;
+  outline: none;
+  transition: all 400ms ease;
+}
+
+.mobile-menu button:expanded {
+  transform: rotate(90deg);
+  background-color: transparent;
+  border: 0;
+}
+
+.page-header ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#title {
+  float: left;
+}
+
+#menu-btn {
+  float: left;
+  padding: 10px;
+  padding-top: 17px;
+}
+
+#social-menu-btn {
+
+}
+
+.accent {
+
+}
+
+.banner {
+  height: 220px;
+  background-image: url("../img/desktop_bw.e681c82ae7cb.jpg");
+  background-position: 0px -100px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.page-title {
+  padding: 110px 10px 10px 35px;
+  font-size: 500%;
+}
+
+.page-footer {
+  background-image: url("../img/desktop_bw.e681c82ae7cb.jpg");
+  background-position: 0px -100px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-size: 200%;
+  background-size: cover;
+  height: 60%;
+  overflow: auto;
+  padding: 10px 10px 10px 35px;
+  position: relative;
+  text-align: left;
+}
+
+@media only screen and (max-width: 800px) {
+  .mobile-menu {
+    display: block;
+  }
+  .desktop-menu {
+    display: none;
+  }
+}
