@@ -126,6 +126,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '.guntweb.herokuapp.com',
     '.jeffreygunter.com',
+    '*',
 ]
 
 # Static files (CSS, JavaScript, Images)
