@@ -13,11 +13,8 @@ def contact(request):
     return render(request, 'Blog/contact.html', {'title': 'Contact Info', 'color': '#f9f568'})
 
 def post_list(request):
-    try:
-        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:5]
-        return render(request, 'Blog/post_list.html', {'posts': posts, 'title': 'Recent Blog Posts', 'color': '#a3f4ff'})
-    except:
-        return render(request, 'Blog/post_detail.html', {'title': 'Recent Blog Posts', 'color': '#a3f4ff'})
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:5]
+    return render(request, 'Blog/post_list.html', {'posts': posts, 'title': 'Recent Blog Posts', 'color': '#a3f4ff'})
 
 def post_detail(request, pk):
         post = get_object_or_404(Post, pk=pk)
