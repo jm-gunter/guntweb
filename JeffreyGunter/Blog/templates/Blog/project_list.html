@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+{% for project in projects %}
+  <div class="project">
+    <h3><a href={{ project.url }}>{{ project.title }}</a></h3>
+    <div class="date">
+      <p>Creation Date: {{ project.created_date }}</p>
+    </div>
+    <p>{{ project.description }}</p>
+  </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Pub Trivia</title>
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Barrio" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!--><link rel="stylesheet" href="{% static 'css/Trivia.css' %}"></!-->
+    <link rel="stylesheet" href="{% static 'Trivia/css/Trivia 2.css' %}">
+  </head>
+  <body>
+
+  <div class="running" id="header">
+    <ul>
+      <li><a href="{% url 'game_list' %}">Pub Trivia</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <br>
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <div class="running" id="footer">
+    <ul>
+      <li>Website By:</li>
+      <li><a href="#">Jeffrey Gunter</a></li>
+    </ul>
+  </div>
+
+  </body>
+</html>

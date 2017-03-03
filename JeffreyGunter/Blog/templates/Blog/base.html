@@ -1,0 +1,50 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Jeffrey Gunter</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'Blog/css/blog.css' %}">
+    </head>
+    <body>
+
+      <nav class="desktop-menu">
+        <a id="home-btn" href="{% url 'post_list' %}">HOME</a>
+        <a id="about-btn" href="{% url 'about' %}">ABOUT</a>
+        <a id="contact-btn" href="{% url 'contact' %}">CONTACT</a>
+        <a id="archive-btn" href="{% url 'archive' %}">ARCHIVE</a>
+        <a id="projects-btn" href="{% url 'project_list' %}">PROJECTS</a>
+      </nav>
+
+<!-->
+      <nav class="mobile-menu">
+        <div>
+          <a href="{% url 'post_list' %}">HOME</a>
+          <a href="#">ABOUT</a>
+          <a href="#">CONTACT</a>
+          <a href="#">ARCHIVE</a>
+          <a href="{% url 'project_list' %}">PROJECTS</a>
+        </div>
+      </nav>
+<!-->
+      <div class="banner"><h1 class="page-title" style="color:{{ color }};">{{ title }}</h1></div>
+
+      <div class="content container">
+        <div class="row">
+          <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+
+      <!--><article><!-->
+
+      <!--><div class="accent"></div><!-->
+      <div class="page-footer" style="color:{{ color }};">
+        <p>Website by: <a href="www.jeffreygunter.com">Jeff Gunter 2017</a></p>
+      </div>
+      <!--></article><!-->
+
+    </body>
+</html>
