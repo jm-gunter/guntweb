@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -23,6 +24,10 @@ class Game(models.Model):
     rounds = models.ManyToManyField("Round", blank=True)
     teams = models.ManyToManyField("Team", blank=True)
     venue = models.ForeignKey(Venue, null=True)
+
+    @property
+    def is_past(self):
+        return date.today() > self.date.date()
 
     def add_new_team(self):
         self.teams.create(name = 'New Team')

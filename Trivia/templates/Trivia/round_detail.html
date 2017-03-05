@@ -2,14 +2,19 @@
 
 {% block content %}
   <div class="page-title">
-    <h1><a href="{% url 'game_detail' pk=game.pk %}">{{ game.name }}</a> > {{ round.name }}</h1>
+    <h1><a href="{% url 'game_detail' pk=game.pk %}">{{ game.name }}:&nbsp;</a>{{ round.name }}</h1>
   </div>
   <div class="game-list-item">
-    <ol class="question">
-      {% for question in questions %}
-        <li><p>{{ question.text }}<br/>
-          A: {{ question.answer }}</p></li>
-      {% endfor %}
-    </ol>
+    {% if game.is_past or user.is_authenticated %}
+      <ol>
+        {% for question in questions %}
+          <li><p>{{ question.text }}<br/>
+            A: {{ question.answer }}</p></li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>{{ game.name }} hasn't been played yet!</p>
+      <p>Come back after {{ game.date|date:"M d, Y" }} to see questions and answers.</p>
+    {% endif %}
   </div>
 {% endblock %}
