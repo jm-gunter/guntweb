@@ -18,7 +18,7 @@ class Venue(models.Model):
 
 class Game(models.Model):
     date = models.DateTimeField(null=True)
-    imageurl = models.CharField(max_length=200, null=True)
+    imageurl = models.CharField(max_length=200, blank=True)
     name = models.CharField(max_length=200)
     rounds = models.ManyToManyField("Round", blank=True)
     teams = models.ManyToManyField("Team", blank=True)
