@@ -10,23 +10,25 @@
     <div class="game-list-item">
       <h1><a href="{% url 'game_detail' pk=game.pk %}">{{ game.name }}</a></h1>
       <!-- add game.description -->
-      <ul class="no-bullet-list">
-        <li>
-          <ul class="no-bullet-hlist">
-            <li>Venue: <a href="#">{{ game.venue }} &nbsp;</a></li>
-            <li>Date: {{ game.date }}</li>
-          </ul>
-        </li>
-        <li>
-          <ul class="no-bullet-hlist">
-            <li>Rounds: &nbsp;<li>
-              {% for round in game.rounds.all %}
-                <li><a href="{% url 'round_detail' game_pk=game.pk pk=round.pk %}">{{ round.name }}</a>{% if not forloop.last %}, &nbsp;{% endif %}
-                </li>
-              {% endfor %}
+      <div class="game-list-details">
+        <ul class="no-bullet-list">
+          <li>
+            <ul class="no-bullet-hlist">
+              <li>Venue: <a href="#">{{ game.venue }} &nbsp;</a></li>
+              <li>Date: {{ game.date }}</li>
             </ul>
           </li>
-      </ul>
+          <li>
+            <ul class="no-bullet-hlist">
+              <li>Rounds: &nbsp;<li>
+                {% for round in game.rounds.all %}
+                  <li><a href="{% url 'round_detail' game_pk=game.pk pk=round.pk %}">{{ round.name }}</a>{% if not forloop.last %}, &nbsp;{% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+        </ul>
+      </div>
     </div>
   {% endfor %}
 {% endblock %}
