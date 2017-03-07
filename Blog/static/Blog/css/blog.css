@@ -111,7 +111,6 @@ a:hover {
 .banner {
   height: 220px;
   background-image: url('../img/desktop_bw.jpg');
-  background-position: 0px -100px;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -125,7 +124,7 @@ a:hover {
 
 .page-footer {
   background-image: url('../img/desktop_bw.jpg');
-  background-position: 0px -100px;
+
   background-attachment: fixed;
   background-repeat: no-repeat;
   font-size: 200%;
@@ -134,7 +133,11 @@ a:hover {
   overflow: auto;
   padding: 10px 10px 10px 35px;
   position: relative;
-  text-align: left;
+  text-align: right;
+}
+
+.post-text {
+  padding-top: 20px;
 }
 
 @media only screen and (max-width: 800px) {

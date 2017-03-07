@@ -18,7 +18,7 @@ def post_list(request):
 
 def post_detail(request, pk):
         post = get_object_or_404(Post, pk=pk)
-        return render(request, 'Blog/post_detail.html', {'post': post, 'title': post.title})
+        return render(request, 'Blog/post_detail.html', {'post': post, 'title': post.title, 'color': '#a3f4ff'})
 
 def post_new(request):
     if request.method == "POST":
