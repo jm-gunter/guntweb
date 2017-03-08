@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .forms import PostForm
-from .models import Post, Project
+from django.contrib.auth.decorators import login_required
+from .forms import PostForm, CommentForm
+from .models import Post, Comment, Project
 
 def about(request):
     return render(request, 'Blog/about.html', {'title': 'About Me', 'color': '#ccf486'})
@@ -17,22 +18,24 @@ def post_list(request):
     return render(request, 'Blog/post_list.html', {'posts': posts, 'title': 'Recent Blog Posts', 'color': '#a3f4ff'})
 
 def post_detail(request, pk):
-        post = get_object_or_404(Post, pk=pk)
-        return render(request, 'Blog/post_detail.html', {'post': post, 'title': post.title, 'color': '#a3f4ff'})
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'Blog/post_detail.html', {'post': post, 'title': post.title, 'color': '#a3f4ff'})
 
+@login_required
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            #post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'Blog/post_edit.html', {'form': form, 'header': 'New Post'})
+    return render(request, 'Blog/post_edit.html', {'form': form, 'title': 'New Post', 'color': '#a3f4ff'})
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -40,12 +43,55 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            #post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'Blog/post_edit.html', {'form': form, 'header': 'Edit Post'})
+    return render(request, 'Blog/post_edit.html', {'form': form, 'title': 'Edit Post', 'color': '#a3f4ff'})
+
+@login_required
+def post_draft_list(request):
+    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+    return render(request, 'blog/post_draft_list.html', {'posts': posts, 'title': 'Unpublished Posts', 'color': '#a3f4ff'})
+
+@login_required
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=pk)
+
+@login_required
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('post_list')
+
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form, 'title': 'New Comment', 'color': '#a3f4ff'})
+
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('post_detail', pk=comment.post.pk)
+
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post_pk = comment.post.pk
+    comment.delete()
+    return redirect('post_detail', pk=post_pk)
 
 def project_list(request):
     projects = Project.objects.all()
