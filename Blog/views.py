@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, ContactForm
 from .models import Post, Comment, Project
 
 def about(request):
@@ -11,7 +11,8 @@ def archive(request):
     return render(request, 'blog/archive.html', {'title': 'Blog Archive', 'color': '#ffa189'})
 
 def contact(request):
-    return render(request, 'blog/contact.html', {'title': 'Contact Info', 'color': '#f9f568'})
+    form = ContactForm
+    return render(request, 'blog/contact.html', {'title': 'Contact Info', 'color': '#f9f568',     'form': form})
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:5]

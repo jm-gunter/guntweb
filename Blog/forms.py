@@ -18,3 +18,12 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'text',)
+
+class ContactForm(forms.Form):
+    name = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    message = forms.CharField(required=True, widget=forms.Textarea)
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields['message'].widget.attrs['class'] = 'text-area'
