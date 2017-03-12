@@ -9,9 +9,12 @@ def about(request):
 def contact(request):
     return render(request, 'Trivia/contact.html')
 
-def game_list(request):
-    games = Game.objects.all()
-    return render(request, 'Trivia/game_list.html', {'games' : games})
+def game_list(request, show_all=False):
+    if show_all:
+        games = Game.objects.order_by('-date').all()
+    else:
+        games = Game.objects.order_by('-date')[:3]
+    return render(request, 'Trivia/game_list.html', {'games' : games, 'show_all': show_all,})
 
 def game_detail(request, pk):
     game = get_object_or_404(Game, pk=pk)
