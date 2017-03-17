@@ -1,46 +1,60 @@
+<!DOCTYPE html>
 {% load staticfiles %}
 <html>
     <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="{% static 'kickstart/js/kickstart.js' %}"></script> <!-- KICKSTART -->
+      <link rel="stylesheet" href="{% static 'Blog/css/kickstart.css' %}" media="all" />
+      <link rel="stylesheet" type="text/css" href="{% static 'Blog/style.css' %}" media="all"/>                          <!-- CUSTOM STYLES -->
       <title>Jeffrey Gunter</title>
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-      <link rel="stylesheet" href="{% static 'Blog/css/blog.css' %}">
     </head>
     <body>
 
-      <nav>
-        <ul class="desktop-menu">
-          <li><a id="home-btn" href="{% url 'post_list' %}">HOME</a></li>
-          <li><a id="about-btn" href="{% url 'about' %}">ABOUT</a></li>
-          <li><a id="contact-btn" href="{% url 'contact' %}">CONTACT</a></li>
-          <li><a id="archive-btn" href="{% url 'archive' %}">ARCHIVE</a></li>
-          <li><a id="projects-btn" href="{% url 'project_list' %}">PROJECTS</a></li>
-        </ul>
-        <ul class="menu-label">
+      <div>
+        <ul class="menu">
+          <li><a href="{% url 'post_list' %}">HOME</a></li>
+          <!--<li><a href="{% url 'about' %}">ABOUT</a></li>-->
+          <li><a href="{% url 'contact' %}">CONTACT</a></li>
+          <li><a href="{% url 'archive' %}">ARCHIVE</a></li>
+          <li><a href="{% url 'project_list' %}">PROJECTS</a></li>
           {% if user.is_authenticated %}
-
-            <li><a href="{% url 'logout' %}">Welcome back {{ user.username }} (click to log out)</a></li>
+          <li class="right"><a href="{% url 'logout' %}">log out {{ user }}</a></li>
           {% else %}
-            <li><a class="menu-label" href="{% url 'login' %}">Login</a></li>
+          <li class="right"><a href="{% url 'login' %}">log in</a></li>
           {% endif %}
+          <li class="right"><a style="padding:8px;" href="https://www.linkedin.com/in/jeff-gunter-65a38764"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+          <li class="right"><a style="padding:8px;" href="https://github.com/jm-gunter"><i class="fa fa-github fa-2x"></i></a></li>
+          <li class="right"><a style="padding:8px;" href="https://www.facebook.com/jeff.gunter.3956"><i class="fa fa-facebook fa-2x"></i></a></li>
         </ul>
-      </nav>
-
-
-      <div class="banner"><h1 class="page-title" style="color:{{ color }};">{{ title }}</h1></div>
+      </div>
 
       <div class="content">
-        {% block content %}
-        {% endblock %}
+        <div class="col_8">
+          <div><h1>{{ title }}</h1></div>
+          {% block content %}
+          {% endblock %}
+        </div>
+        <div class="col_4">
+          <ul class="alt">
+            <li><a href="{% url 'post_list' %}">HOME</a></li>
+            <!--<li><a href="{% url 'about' %}">ABOUT</a></li>-->
+            <li><a href="{% url 'contact' %}">CONTACT</a></li>
+            <li><a href="{% url 'archive' %}">ARCHIVE</a></li>
+            <li><a href="{% url 'project_list' %}">PROJECTS</a></li>
+            <li><a href="#">SOCIAL</a></li>
+          </ul>
+          <div>
+            <h3>About Me</h3>
+            <img class="align-left" src="{% static 'Blog/img/IMG_1181.jpg' %}" width="100"/>
+            <p>
+              I'm Jeff Gunter. I develop .Net applications for scientific data capture and analysis. I also build web apps, contribute to the open-source projects, and host pub trivia night at <a href="https://www.thedowntownbar.com">The Downtown Bar</a> in Pueblo, CO. If you need desktop, web, or mobile work, please <a href="{% url 'contact' %}">contact me</a>. I'd love to discuss your next project.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <!--><article><!-->
-
-      <!--><div class="accent"></div><!-->
-      <div class="page-footer" style="color:{{ color }};">
-        <p>Website by: <a href="http://jeffreygunter.com">Jeff Gunter</a> 2017</p>
-      </div>
-      <!--></article><!-->
+      <hr class="alt1">
+        <p class="center">Website by: <a href="http://jeffreygunter.com">Jeff Gunter</a> 2017</p>
 
     </body>
 </html>

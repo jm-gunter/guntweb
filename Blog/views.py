@@ -5,22 +5,22 @@ from .forms import PostForm, CommentForm, ContactForm
 from .models import Post, Comment, Project
 
 def about(request):
-    return render(request, 'blog/about.html', {'title': 'About Me', 'color': '#ccf486'})
+    return render(request, 'blog/about.html', {'title': 'About Me'})
 
 def archive(request):
-    return render(request, 'blog/archive.html', {'title': 'Blog Archive', 'color': '#ffa189'})
+    return render(request, 'blog/archive.html', {'title': 'Blog Archive'})
 
 def contact(request):
     form = ContactForm
-    return render(request, 'blog/contact.html', {'title': 'Contact Info', 'color': '#f9f568',     'form': form})
+    return render(request, 'blog/contact.html', {'title': 'Contact', 'form': form})
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:5]
-    return render(request, 'blog/post_list.html', {'posts': posts, 'title': 'Recent Blog Posts', 'color': '#a3f4ff'})
+    return render(request, 'blog/post_list.html', {'posts': posts, 'title': 'Recent Blog Posts'})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post, 'title': post.title, 'color': '#a3f4ff'})
+    return render(request, 'blog/post_detail.html', {'post': post, 'title': post.title})
 
 @login_required
 def post_new(request):
@@ -34,7 +34,7 @@ def post_new(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form, 'title': 'New Post', 'color': '#a3f4ff'})
+    return render(request, 'blog/post_edit.html', {'form': form, 'title': 'New Post'})
 
 @login_required
 def post_edit(request, pk):
@@ -49,12 +49,12 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form, 'title': 'Edit Post', 'color': '#a3f4ff'})
+    return render(request, 'blog/post_edit.html', {'form': form, 'title': 'Edit Post'})
 
 @login_required
 def post_draft_list(request):
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
-    return render(request, 'blog/post_draft_list.html', {'posts': posts, 'title': 'Unpublished Posts', 'color': '#a3f4ff'})
+    return render(request, 'blog/post_draft_list.html', {'posts': posts, 'title': 'Unpublished Posts'})
 
 @login_required
 def post_publish(request, pk):
@@ -79,7 +79,7 @@ def add_comment_to_post(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form, 'title': 'New Comment', 'color': '#a3f4ff'})
+    return render(request, 'blog/add_comment_to_post.html', {'form': form, 'title': 'New Comment'})
 
 @login_required
 def comment_approve(request, pk):
@@ -96,4 +96,4 @@ def comment_remove(request, pk):
 
 def project_list(request):
     projects = Project.objects.all()
-    return render(request, 'blog/project_list.html', {'projects': projects, 'title': "Projects", 'color': '#d7a0ff'})
+    return render(request, 'blog/project_list.html', {'projects': projects, 'title': "Projects"})

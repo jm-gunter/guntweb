@@ -1,9 +1,12 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-  <form role="form" action="" method="post">
+<div class="col_10">
+  <h3>Email Me</h3>
+  <form class="vertical" role="form" action="" method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit">Send</button>
   </form>
+</div>
 {% endblock %}
