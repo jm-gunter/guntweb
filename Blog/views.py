@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from .forms import PostForm, CommentForm, ContactForm
 from .models import Post, Comment, Project
 
@@ -11,8 +12,22 @@ def archive(request):
     return render(request, 'blog/archive.html', {'title': 'Blog Archive'})
 
 def contact(request):
-    form = ContactForm
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            send_mail(
+                'Message from {0}'.format(form.cleaned_data.get('name')),
+                form.cleaned_data.get('message'),
+                form.cleaned_data.get('email'),
+                ('jeffrey@jeffreygunter.com',)
+            )
+            return redirect('message')
+    else:
+        form = ContactForm()
     return render(request, 'blog/contact.html', {'title': 'Contact', 'form': form})
+
+def message(request):
+    return render(request, 'blog/message.html')
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:5]
