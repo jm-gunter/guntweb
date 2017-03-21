@@ -19,7 +19,7 @@ def contact(request):
                 'Message from {0}'.format(form.cleaned_data.get('name')),
                 form.cleaned_data.get('message'),
                 form.cleaned_data.get('email'),
-                ('jeffrey@jeffreygunter.com',)
+                ('gunter.jeffm@gmail.com',)
             )
             return redirect('message')
     else:
