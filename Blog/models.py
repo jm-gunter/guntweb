@@ -45,7 +45,7 @@ class Project(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=STATUS_CHOICES[0])
     url = models.CharField(max_length=255, blank=True, null=True)
-    image_url = models.CharField(max_length=255, blank=Truw, null=True)
+    # image_url = models.CharField(max_length=255, blank=Truw, null=True)
 
     def __str__(self):
         return self.title
